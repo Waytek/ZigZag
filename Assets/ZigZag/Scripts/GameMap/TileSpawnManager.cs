@@ -15,25 +15,27 @@ namespace Game
     [Inject] private SignalBus _signal_bus;
 
     private List<TileHelper> _tiles = new List<TileHelper>();
+    private List<TileHelper> _spawn_place_tiles = new List<TileHelper>();
     private CoroutineHandle _spawn_coroutine_handle;
+    private System.Random random = new System.Random();
 
     public void Initialize()
     {
       _signal_bus.Subscribe<GameStartSignal>(_on_game_started);
-      _signal_bus.Subscribe<GameEndSignal>(_on_game_end);
+      _signal_bus.Subscribe<GameOverSignal>(_on_game_over);
+      _spawn_start_place();
     }
 
     private void _on_game_started()
     {
-      _remove_all_tiles();
-      _spawn_start_place();
       _spawn_coroutine_handle = Timing.RunCoroutine(_spawn_coroutine());
     }
 
-    private void _on_game_end()
+    private void _on_game_over()
     {
-      _remove_all_tiles();
       Timing.KillCoroutines(_spawn_coroutine_handle);
+      _remove_all_tiles();
+      _spawn_start_place();
     }
 
     private IEnumerator<float> _spawn_coroutine()
@@ -56,10 +58,18 @@ namespace Game
         }
         else
         {
-          spawnPos = _tiles[i - 1].transform.position + new Vector3(0,0, _tile_settings.Height);
+          spawnPos = _spawn_place_tiles[i - 1].transform.position + new Vector3(0,0, _tile_settings.Height);
         }
         TileHelper spawnedTile = _tile_factory.Create(spawnPos, _settings.StartTileWidth, TileHelper.Directions.Forward);
-        _tiles.Add(spawnedTile);
+        _spawn_place_tiles.Add(spawnedTile);
+      }
+
+      _tiles.Add(_spawn_place_tiles[_spawn_place_tiles.Count - 1]);
+      _spawn_place_tiles.Remove(_spawn_place_tiles[_spawn_place_tiles.Count - 1]);
+
+      for(int i=0; i< _settings.SpawnOnStart; i++)
+      {
+        _spawn_tile();
       }
     }
 
@@ -72,7 +82,7 @@ namespace Game
       float sameRowMoveFactor = 0f;
 
       int sameRow = 0;
-      for (int i = _tiles.Count - 1 - _settings.StartTileHeight; i > 0; i--)
+      for (int i = _tiles.Count - 1; i >= 0; i--)
       {
         if (_tiles[i].Direction == tileToSpawn.Direction)
         {
@@ -87,8 +97,9 @@ namespace Game
       if (sameRow > width)
       {
         Array values = Enum.GetValues(typeof(TileHelper.Directions));
-        System.Random random = new System.Random();
+        
         direcrtion = (TileHelper.Directions)values.GetValue(random.Next(values.Length));
+
         if (direcrtion != tileToSpawn.Direction)
         {
           spawnPointMoveFactor = _tile_settings.Height + (_tile_settings.Height / 2 * (tileToSpawn.Widt - 1));
@@ -117,6 +128,8 @@ namespace Game
       {
         _tiles[0].Destroy();
         _tiles.Remove(_tiles[0]);
+        _spawn_place_tiles.ForEach(tile => tile.Destroy());
+        _spawn_place_tiles.Clear();
       }
 
       _signal_bus.Fire(new TileSpawnSignal() { Tile = spawnedTile });
@@ -136,7 +149,8 @@ namespace Game
     {
       public int StartTileWidth = 3;
       public int StartTileHeight = 3;
-      public int SpawnedLenght;
+      public int SpawnOnStart = 10;
+      public int SpawnedLenght = 20;
       public float SpawnTime = 1f;
     }
   }
