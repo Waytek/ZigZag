@@ -20,6 +20,39 @@ MonoBehaviour:
       TileWidth: 2
     - difficulty: 2
       TileWidth: 1
+    _Difficulties_Curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 10
+        value: 1
+        inSlope: -0.113207534
+        outSlope: -0.113207534
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.125
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 35
+        value: 2
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   TileHelper:
     Prefab: {fileID: 4190017404686574291, guid: 94361770ab9d1b540a97cde1af4f3173,
       type: 3}
@@ -31,11 +64,16 @@ MonoBehaviour:
   TileSpawner:
     StartTileWidth: 3
     StartTileHeight: 3
-    SpawnedLenght: 40
-    SpawnTime: 2
+    SpawnOnStart: 40
+    SpawnedLenght: 45
+    SpawnTime: 0.15
   CrystalHelper:
     Prefab: {fileID: 2990251762640176418, guid: aae64c2ef64539746bb73052edb28816,
       type: 3}
   CrystalSpawner:
     SpawnType: 0
     SpawnOrder: 5
+  PlayerSettings:
+    Prefab: {fileID: 6096276885488252480, guid: f282aa4d2aa014d49ac964cf9c7354d7,
+      type: 3}
+    Speed: 7.2
