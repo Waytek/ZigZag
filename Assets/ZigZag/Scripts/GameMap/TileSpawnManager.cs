@@ -39,9 +39,9 @@ namespace Game
     private IEnumerator<float> _spawn_coroutine()
     {
       while (true)
-      {
-        yield return Timing.WaitForSeconds(_settings.SpawnTime);
+      {        
         _spawn_tile();
+        yield return Timing.WaitForSeconds(_settings.SpawnTime);
       }
     }
 
@@ -119,7 +119,7 @@ namespace Game
         _tiles.Remove(_tiles[0]);
       }
 
-      _signal_bus.Fire<TileSpawnSignal>();
+      _signal_bus.Fire(new TileSpawnSignal() { Tile = spawnedTile });
     }
 
     private void _remove_all_tiles()
