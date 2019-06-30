@@ -29,7 +29,7 @@ namespace Game
     public void Destroy()
     {
       Timing.RunCoroutine(_despawn_coroutine());
-      if (Crystal)
+      if (Crystal != null && Crystal.enabled)
       {
         Crystal.Destroy();
       }
