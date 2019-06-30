@@ -1,10 +1,13 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 namespace Game
 {
   public class CameraHelper : MonoBehaviour
   {
+    [Inject] private SignalBus _signal_bus;
+
     [SerializeField]
     private float speed;
 
@@ -18,6 +21,13 @@ namespace Game
         throw new ArgumentException($"Cant get target for CameraHelper {gameObject.name}");
       }
       transform.parent = null;
+      _signal_bus.Subscribe<GameOverSignal>(_on_game_over);
+    }
+
+    private void _on_game_over()
+    {
+      _signal_bus.Unsubscribe<GameOverSignal>(_on_game_over);
+      Destroy(this.gameObject);
     }
 
     private void Update()
