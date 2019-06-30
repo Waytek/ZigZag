@@ -16,15 +16,18 @@ namespace Game {
       }
     }
 
+    public int CurrentScore{ get; private set;}
+
     public void Initialize()
     {
       _signal_bus.Fire<GameStartSignal>();
       _signal_bus.Subscribe<GameEndSignal>(_on_game_end);
+      _signal_bus.Subscribe<CrystalPickUpSignal>(() => CurrentScore++);
     }
 
     private void _on_game_end()
     {
-
+      
     }
 
     [Serializable]
