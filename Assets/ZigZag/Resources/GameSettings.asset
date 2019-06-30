@@ -12,8 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db4d8ab51ca4ad48844c113bfbd80fa, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  GameInstaller:
-    EnemyFacadePrefab: {fileID: 158650, guid: 55f63c48150ecbb469e095dbde67c6e9, type: 3}
-    BulletPrefab: {fileID: 1211991173579106, guid: 4d22825d6393b964f90d550dd2acc50f,
+  GameManager:
+    Difficulties:
+    - difficulty: 0
+      TileWidth: 3
+    - difficulty: 1
+      TileWidth: 2
+    - difficulty: 2
+      TileWidth: 1
+  TileHelper:
+    Prefab: {fileID: 4190017404686574291, guid: 94361770ab9d1b540a97cde1af4f3173,
       type: 3}
-    ExplosionPrefab: {fileID: 100002, guid: 93a60ba8e409947b1a0334537c8b38c8, type: 3}
+    ForwardRotation: {x: 0, y: 0, z: 0}
+    RightRotation: {x: 0, y: 90, z: 0}
+  TileSpawner:
+    StartTileWidth: 3
+    StartTileHeight: 3
+    SpawnedLenght: 0
