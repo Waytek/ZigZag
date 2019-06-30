@@ -10,6 +10,7 @@ namespace Game
     public TileSpawnManager.Settings TileSpawner;
     public CrystalHelper.Settings CrystalHelper;
     public CrystalSpawnManager.Settings CrystalSpawner;
+    public PlayerHelper.Settings PlayerSettings;
 
 
 
@@ -20,6 +21,7 @@ namespace Game
       Container.BindInstance(TileHelper);
       Container.BindInstance(CrystalHelper);
       Container.BindInstance(CrystalSpawner);
+      Container.BindInstance(PlayerSettings);
     }
   }
 }
