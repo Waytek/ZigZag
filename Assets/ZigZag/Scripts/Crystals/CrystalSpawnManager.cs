@@ -18,6 +18,7 @@ namespace Game
     public void Initialize()
     {
       _signal_bus.Subscribe<TileSpawnSignal>(_on_tile_spawn);
+      _signal_bus.Subscribe<GameOverSignal>(_on_game_over);
     }
 
     private void _on_tile_spawn(TileSpawnSignal args)
@@ -48,6 +49,12 @@ namespace Game
         default:
           throw new ArgumentException($"On spawned CrystalHelper with spawn type {_settings.SpawnType} not processed, default is empty");
       }
+    }
+
+    private void _on_game_over()
+    {
+      _tile_num = 0;
+      _spawn_this_order = false;
     }
 
     private bool _check_random_spawn()
