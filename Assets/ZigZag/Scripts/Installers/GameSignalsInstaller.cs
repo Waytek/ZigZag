@@ -16,7 +16,6 @@ namespace Game
 
       Container.BindSignal<GameStartSignal>().ToMethod(() => Debug.Log("GameStartSignal Fire"));
       Container.BindSignal<GameEndSignal>().ToMethod(() => Debug.Log("GameEndSignal Fire"));
-      Container.BindSignal<TileSpawnSignal>().ToMethod(() => Debug.Log("TileSpawnSignal Fire"));
       Container.BindSignal<CrystalPickUpSignal>().ToMethod(() => Debug.Log("CrystalPickUpSignal Fire"));
       
     }

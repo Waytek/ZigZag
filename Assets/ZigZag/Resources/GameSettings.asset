@@ -32,4 +32,10 @@ MonoBehaviour:
     StartTileWidth: 3
     StartTileHeight: 3
     SpawnedLenght: 40
-    SpawnTime: 0.2
+    SpawnTime: 2
+  CrystalHelper:
+    Prefab: {fileID: 2990251762640176418, guid: aae64c2ef64539746bb73052edb28816,
+      type: 3}
+  CrystalSpawner:
+    SpawnType: 0
+    SpawnOrder: 5
