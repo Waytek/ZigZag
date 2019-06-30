@@ -76,4 +76,4 @@ MonoBehaviour:
   PlayerSettings:
     Prefab: {fileID: 6096276885488252480, guid: f282aa4d2aa014d49ac964cf9c7354d7,
       type: 3}
-    Speed: 7.2
+    Speed: 7.3
