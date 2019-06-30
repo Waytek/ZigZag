@@ -3,7 +3,7 @@
 
   public struct GameStartSignal { }
 
-  public struct GameEndSignal { }
+  public struct GameOverSignal { }
 
   public struct TileSpawnSignal
   {
@@ -11,5 +11,7 @@
   }
 
   public struct CrystalPickUpSignal { }
+
+  public struct Touch { }
 
 }
