@@ -23,9 +23,13 @@ MonoBehaviour:
   TileHelper:
     Prefab: {fileID: 4190017404686574291, guid: 94361770ab9d1b540a97cde1af4f3173,
       type: 3}
+    Height: 1
     ForwardRotation: {x: 0, y: 0, z: 0}
     RightRotation: {x: 0, y: 90, z: 0}
+    DestroyTime: 3
+    DestroyAnimationSpeed: 25
   TileSpawner:
     StartTileWidth: 3
     StartTileHeight: 3
-    SpawnedLenght: 0
+    SpawnedLenght: 40
+    SpawnTime: 0.2
