@@ -11,24 +11,28 @@ namespace Game
     [Inject] private SignalBus _signal_bus;
 
     private IMemoryPool _pool;
+    private TileHelper _tile_helper;
 
     private void OnTriggerEnter(Collider other)
     {
       if (other.GetComponent<PlayerHelper>() != null)
       {
         _signal_bus.Fire<CrystalPickUpSignal>();
-        _pool.Despawn(this);
+        Destroy();
       }
     }                                                                                                                                                         
 
     public void OnDespawned()
     {
-      _pool = null;      
+      _pool = null;
+      _tile_helper = null;
     }
 
     public void OnSpawned(TileHelper tileToSpawn, IMemoryPool pool)
     {
+      transform.localScale = Vector3.one;
       _pool = pool;
+      _tile_helper = tileToSpawn;
       transform.position = tileToSpawn.transform.position;
       transform.parent = tileToSpawn.transform;
       tileToSpawn.Crystal = this;
@@ -36,6 +40,7 @@ namespace Game
 
     public void Destroy()
     {
+      _tile_helper.Crystal = null;
       _pool.Despawn(this);
       
     }
